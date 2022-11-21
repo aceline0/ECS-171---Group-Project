@@ -31,3 +31,10 @@ Using kde plots and correlation matrix plots, we infer that Time, V13, V15, V22,
 * Train Set, Test Set\
 Remember that we have much more fraud data than non-fraud data. We choose to oversample the non-fraud data here. If we undersmaple, we will suffer the risk of losing important information since undersample means we only utilize a litte bit of the non-fraud data. In addition, compared to the whole dataset, the minority class does not have sufficient size. Therefore, we will oversample. Specifically, we will use 'SMOTE' (from online resources, ‘SMOTE’ may achieve higher recall). Recall is a good performance metric to our model because we want to detect as many fraud cases as possible to protect people's properties. It is awful if our model identifies a fraud case as a non-fraud case, and then people will lose money and they may need to contact the bank for further actions. \
 Notice that we will oversample the train set after train test split because we want to test the model on UNSEEN test data.\
+
+Reference:
+* https://stackoverflow.com/questions/55104819/display-count-on-top-of-seaborn-barplot
+* https://seaborn.pydata.org/generated/seaborn.kdeplot.html
+* https://stackoverflow.com/questions/69513501/seaborn-plot-displot-with-hue-and-dual-y-scale-twinx
+* https://stackoverflow.com/questions/24500065/closing-matplotlib-figures
+* https://towardsdatascience.com/smote-fdce2f605729
