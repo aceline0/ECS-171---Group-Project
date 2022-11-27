@@ -33,17 +33,13 @@ Remember that we have much more fraud data than non-fraud data. We choose to ove
 Notice that we will oversample the train set after train test split because we want to test the model on UNSEEN test data.
 
 # Model Building and Evaluation
-## First Model
+## First Model - Logistic Regression
 For our first model, we chose Logistic Regression. We started with 1000 max_iterations. 
 
-In evaluating the train and test set, we chose two methods of measuring model accuracy by using confusion matrix and classification report. 
+In evaluating the train and test set, we chose two methods of measuring model accuracy:
+  1. Confusion Matrix
+  2. Classification Report
 
-* **Train Results**\
-
-* **Test Results**\
-
-
-* **Comparing Train and Test Error**\
 
 
 
