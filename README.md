@@ -40,10 +40,12 @@ In evaluating the train and test set, we chose two methods of measuring model ac
   1. Confusion Matrix
   2. Classification Report
 
+* **Comparing Train and Test Error**\
+In the classification report for Train results, we can observe that class 0 has higher recall whereas class 1 has higher precision but f1-score for both classes remain the same. 
 
+Meanwhile, for test result classification report, there is quite a significant difference in scores between class 0 and class 1 with class 0 having higher scores overall. 
 
-
-
+We can observe that the model performed well for the train set but not in the test set due to the imbalanced data.
 
 
 
