@@ -34,7 +34,7 @@ Notice that we will oversample the train set after train test split because we w
 
 # Model Building and Evaluation
 ## First Model - Logistic Regression
-The first model used was Logistic Regression, with max_iterations set to 1000.
+The first model used was Logistic Regression, with max_iterations set to 1200.
 
 In evaluating the train and test set, two methods of measuring model accuracy were used:
   1. Confusion Matrix
