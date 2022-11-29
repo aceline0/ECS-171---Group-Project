@@ -16,15 +16,15 @@ The dataset contains transactions made by credit cards in September 2013 by Euro
 It contains 30 numerical input variables (V1, V2 … V28, Time, Amount). \
 The variable ‘Class’ is the dependent variable (1 = fraud, 0 = not fraud) our model will predict.
 * **Duplicate Data Entries**\
-There are 1081 duplicate samples. We will remove them because multiple identical samples can lead to biased model, which favors this subset of samples.
+There are 1081 duplicate samples. This can be because of the lack of unique identyfiers in the database where the data was obtained. We will remove them because multiple identical samples can lead to biased model, which favors this subset of samples.
 * **Null Data**\
-Check null values because they don’t contribute to build the model and they can affect the performance. Fortunately, there is no null data.
+Before scaling we checked if there were any null values because they don’t contribute to build the model and they can affect the performance. Fortunately, there is no null data.
 * **Data Scaling**\
 The data ‘Time’ and ‘Amount’ have large numerical values, which are different from other features. \
-‘Time’ is the number of seconds elapsed between this transaction and the first transaction in the dataframe, spanning into 48 hours. We decide to add another column ‘Hour’ based on ‘Time’, as ‘Hour’ may show the peak period of credit card usage and its relation to the time of credit card fraud.\
-Since the data are not normally distributed, we will perform normalization on the data.
+‘Time’ is the number of seconds elapsed between this transaction and the first transaction in the dataframe, spanning into 48 hours. We decide to add another column ‘Hour’ based on ‘Time’, as ‘Hour’ may show the peak period of credit card usage and its relation to the time of credit card fraud. We can find out if frauds are more likely to happen at a spesific time of the day.\
+Since the data are not normally distributed, we will perform normalization on the data and the variable now have values between 0 and 1 which makes them easier to compare in our further analysis.
 * **Feature Selection**\
-Since we have 31 features now.  We want to see how well these features help the model distinguish fraud and non-fraud.\
+We have 31 features and we want to see how well these features help the model distinguish fraud and non-fraud.\
 We firstly use kde plots to visualize the each feature's distribution to fraud cases or non-fraud cases.\
 Secondly, we use correlation matrix plot to find the correlation between variables. Notice that  we have imbalance data about ‘Class’ in the original dataframe, the correlation matrix may come out biased or inaccurate. So we perform undersample and oversample on the dataframe, and then do the correlation matrix plot on both sampled dataframe. We want to how undersample and oversample will affect the correlation matrix.\
 Using kde plots and correlation matrix plots, we infer that Time, V13, V15, V22, V23,V24,V25,V26, V27,V28, Amount, V8, V21can not distinguish fraud cases and non-fraud cases well, and thus we will drop these features.
