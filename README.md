@@ -10,6 +10,14 @@ The file `data/creditcard.csv` contains the dataset with all 285.000 transaction
 
 The folder `code/` contains the different notesbooks and python scripts for the project.
 
+# Introduction
+
+Sadly, finance and fraud are two words that are deeply intertwined. When there is substantial monetary gain available, malicious actors will attempt to carve out a piece. Ever since the Diner Club's card in 1951, the convenience presented by credit cards led to a substantial growth, where in 2021, 581 billion credit card transactions were conducted. 
+
+When choosing a dataset to work on, it seemed natural to pick an area with which we were familiar. Since almost everyone carries a credit card, both interpreting the data and understanding important metrics to measure came naturally. What is most fascinating with the dataset is its real-world applicability, meaning, what we are learning in this course is being applied to solve a real (big!) problem. However, it comes with its trade-offs, mainly that all features are anonymized, named v1-v28.
+
+
+
 # Data Exploration and Processing
 * **Data Overview**\
 The dataset contains transactions made by credit cards in September 2013 by European cardholders. This dataset presents transactions that occurred in two days, where we have 492 frauds out of 284,807 transactions. \
