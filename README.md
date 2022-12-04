@@ -32,7 +32,7 @@ There are 1081 duplicate samples. This can be because of the lack of unique iden
 * **Null Data**\
 Before scaling we checked if there were any null values because they don’t contribute to build the model and they can affect the performance. Fortunately, there is no null data.
 
-## Data Exploration
+## Data Preprocessing
 * **Data Scaling**\
 The data ‘Time’ and ‘Amount’ have large numerical values, which are different from other features. \
 ‘Time’ is the number of seconds elapsed between this transaction and the first transaction in the dataframe, spanning into 48 hours. We decide to add another column ‘Hour’ based on ‘Time’, as ‘Hour’ may show the peak period of credit card usage and its relation to the time of credit card fraud. We can find out if frauds are more likely to happen at a spesific time of the day.\
@@ -64,7 +64,18 @@ In evaluating the train and test set, two methods of measuring model accuracy we
   1. Confusion Matrix
   2. Classification Report
 
-# Model Building and Evaluation
+This was done using the built in methods in sklearn.metrics, as demonstrated below:
+```python
+from sklearn.metrics import classification_report
+from sklearn.metrics import confusion_matrix
+
+print(classification_report(y_test, yhat))
+cm = confusion_matrix(y_test, yhat)
+disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=['Non-fraud', 'Fraud'])
+disp.plot()
+```
+
+# Results
 
 * **Comparing Train and Test Error**\
 In the classification report for the training data, the precision was lower (91% compared to 97%) for class 0, whilst recall was higher (97% vs 90% for class 1). Regarding the f1-score they remained largely the same, with scores of 94% and 93% respectively.\
