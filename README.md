@@ -20,7 +20,9 @@ The impact of implementing and having good models to detect financial (in this c
 
 Finally, with the world becoming increasingly digitalised, more data can be tied to each transaction. In machine learning, more data points and more features allows for better models, i.e., better detection of fraud. The future of finance will no doubt continue to become more data driven, why this project serves as a solid stepping stone for understanding how machine learning ties into tomorrow's systems.  
 
-# Data Exploration and Processing
+# Methods
+
+## Data Exploration
 * **Data Overview**\
 The dataset contains transactions made by credit cards in September 2013 by European cardholders. This dataset presents transactions that occurred in two days, where we have 492 frauds out of 284,807 transactions. \
 It contains 30 numerical input variables (V1, V2 … V28, Time, Amount). \
@@ -29,6 +31,8 @@ The variable ‘Class’ is the dependent variable (1 = fraud, 0 = not fraud) ou
 There are 1081 duplicate samples. This can be because of the lack of unique identyfiers in the database where the data was obtained. We will remove them because multiple identical samples can lead to biased model, which favors this subset of samples.
 * **Null Data**\
 Before scaling we checked if there were any null values because they don’t contribute to build the model and they can affect the performance. Fortunately, there is no null data.
+
+## Data Exploration
 * **Data Scaling**\
 The data ‘Time’ and ‘Amount’ have large numerical values, which are different from other features. \
 ‘Time’ is the number of seconds elapsed between this transaction and the first transaction in the dataframe, spanning into 48 hours. We decide to add another column ‘Hour’ based on ‘Time’, as ‘Hour’ may show the peak period of credit card usage and its relation to the time of credit card fraud. We can find out if frauds are more likely to happen at a spesific time of the day.\
@@ -41,6 +45,16 @@ Using kde plots and correlation matrix plots, we infer that Time, V13, V15, V22,
 * **Train Set, Test Set**\
 Remember that we have much more fraud data than non-fraud data. We choose to oversample the non-fraud data here. If we undersmaple, we will suffer the risk of losing important information since undersample means we only utilize a litte bit of the non-fraud data. In addition, compared to the whole dataset, the minority class does not have sufficient size. Therefore, we will oversample. Specifically, we will use 'SMOTE' (from online resources, ‘SMOTE’ may achieve higher recall). Recall is a good performance metric to our model because we want to detect as many fraud cases as possible to protect people's properties. It is awful if our model identifies a fraud case as a non-fraud case, and then people will lose money and they may need to contact the bank for further actions. \
 Notice that we will oversample the train set after train test split because we want to test the model on UNSEEN test data.
+
+## Models
+
+* **Model 1 - Logistic Regression**\
+The first model was [Logistic Regression](./code/firstModel.ipynb), with the hyperparameter max_iterations set to 1200. Two methods of altering complexity were used to find differences in the model's performance:
+  1. PCA - decreasing complexity through dimensionality reduction. The number of principal components used in training were 7.
+  2. Polynomial features - adding complexity by introducing more features. No polynomial features were added to training.
+
+* **Model 2 - K-Nearest Neighbors**\
+
 
 # Model Building and Evaluation
 ## First Model - Logistic Regression
