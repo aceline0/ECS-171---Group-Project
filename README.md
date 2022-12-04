@@ -77,6 +77,7 @@ disp.plot()
 
 # Results
 
+## Model 1 - Logistic Regression
 * **Comparing Train and Test Error**\
 In the classification report for the training data, the precision was lower (91% compared to 97%) for class 0, whilst recall was higher (97% vs 90% for class 1). Regarding the f1-score they remained largely the same, with scores of 94% and 93% respectively.\
 Meanwhile, the test data's classification report showed a large difference in precision and recall for the two classes. Class 0 had a precision of 100% and a recall of 97%, whilst class 1 had a precision of 4% with a recall of 86%. The f1-scores were 98% and 8% respectively.\
@@ -84,11 +85,16 @@ The stark difference in error can be explained by the imbalanced nature of the i
 With a high recall being the most important metric in evaluating the model, and the test data having a recall of 84%, the conclusion was drawn that the model is not optimal for the classification problem at hand.
 
 * **The model's position on a fitting graph**\
-Two methods of altering complexity were used two find differnences in the model's performance: PCA, i.e., decreasing complexity by removing features, and Polynomial features, i.e., adding complexity by introducing more features.\
-From the PCA-analysis, the conclusion was drawn that using 7 principal components decreased the model's complexity adequatly whilst still retaining a low training/test loss.\
-Using different degrees of polynomial features, it became evident that adding complexity using polynomial features only decreased training loss with test loss remaining largely the same. Therefore, introducing polynomial features is inadequate, as it increases the model's risk of overfitting (pushing the model further out on the x-axis of a fitting graph).
+As mentioned in the Methods section, two methods of altering complexity were used two find differnences in the model's performance: PCA, and Polynomial features.\
+![Logistic Regression PCA fitting graph](/assets/img/logistic_regression_pca.png)
+From the PCA-analysis, the fitting graph shows that using 7 principal components decreased the model's complexity adequatly whilst still retaining a low training/test loss.\
+![Polynomial Features fitting graph](/assets/img/logistic_regression_poly_fitting.png)
+Using different degrees of polynomial features, it became evident that adding complexity using polynomial features only decreased training loss with test loss remaining largely the same. 
 
 # Discussion
+
+### Logistic regression
+Therefore, introducing polynomial features is inadequate, as it increases the model's risk of overfitting (pushing the model further out on the x-axis of a fitting graph).
 
 # Conclusion
 
