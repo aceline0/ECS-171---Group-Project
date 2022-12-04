@@ -54,15 +54,17 @@ The first model was [Logistic Regression](./code/firstModel.ipynb), with the hyp
   2. Polynomial features - adding complexity by introducing more features. No polynomial features were added to training.
 
 * **Model 2 - K-Nearest Neighbors**\
+The second model used was [K-Nearest Neighbors](code/knn.ipynb) (KNN).
 
+* **Model 3 - Gaussian Naive Bayes**\
+The third model used was [Gaussian Naive Bayes](code/NaiveBayes.ipynb).
 
-# Model Building and Evaluation
-## First Model - Logistic Regression
-The first model used was Logistic Regression, with max_iterations set to 1200.
-
+## Evaluation
 In evaluating the train and test set, two methods of measuring model accuracy were used:
   1. Confusion Matrix
   2. Classification Report
+
+# Model Building and Evaluation
 
 * **Comparing Train and Test Error**\
 In the classification report for the training data, the precision was lower (91% compared to 97%) for class 0, whilst recall was higher (97% vs 90% for class 1). Regarding the f1-score they remained largely the same, with scores of 94% and 93% respectively.\
