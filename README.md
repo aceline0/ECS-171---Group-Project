@@ -79,21 +79,24 @@ disp.plot()
 
 ## Model 1 - Logistic Regression
 * **Comparing Train and Test Error**\
+![Logistic Regression Training Confusion Matrix](/assets/img/log_reg/log_reg_training_matrix.png)\
 In the classification report for the training data, the precision was lower (91% compared to 97%) for class 0, whilst recall was higher (97% vs 90% for class 1). Regarding the f1-score they remained largely the same, with scores of 94% and 93% respectively.\
-Meanwhile, the test data's classification report showed a large difference in precision and recall for the two classes. Class 0 had a precision of 100% and a recall of 97%, whilst class 1 had a precision of 4% with a recall of 86%. The f1-scores were 98% and 8% respectively.\
-The stark difference in error can be explained by the imbalanced nature of the input data, i.e., it contains way more non-fraudulent transactions than fraudulent ones.\
-With a high recall being the most important metric in evaluating the model, and the test data having a recall of 84%, the conclusion was drawn that the model is not optimal for the classification problem at hand.
+![Logistic Regression Training Confusion Matrix](/assets/img/log_reg/log_reg_test_matrix.png)\
+Meanwhile, the test data's classification report showed a large difference in precision and recall for the two classes. Class 0 had a precision of 100% and a recall of 97%, whilst class 1 had a precision of 4% with a recall of 86%. The f1-scores were 98% and 8% respectively.
 
 * **The model's position on a fitting graph**\
 As mentioned in the Methods section, two methods of altering complexity were used two find differnences in the model's performance: PCA, and Polynomial features.\
-![Logistic Regression PCA fitting graph](/assets/img/logistic_regression_pca.png)
+![Logistic Regression PCA fitting graph](/assets/img/log_reg/logistic_regression_pca.png)\
 From the PCA-analysis, the fitting graph shows that using 7 principal components decreased the model's complexity adequatly whilst still retaining a low training/test loss.\
-![Polynomial Features fitting graph](/assets/img/logistic_regression_poly_fitting.png)
+![Polynomial Features fitting graph](/assets/img/log_reg/logistic_regression_poly_fitting.png)\
 Using different degrees of polynomial features, it became evident that adding complexity using polynomial features only decreased training loss with test loss remaining largely the same. 
 
 # Discussion
 
 ### Logistic regression
+The stark difference in error can be explained by the imbalanced nature of the input data, i.e., it contains way more non-fraudulent transactions than fraudulent ones.\
+With a high recall being the most important metric in evaluating the model, and the test data having a recall of 84%, the conclusion was drawn that the model is not optimal for the classification problem at hand.
+
 Therefore, introducing polynomial features is inadequate, as it increases the model's risk of overfitting (pushing the model further out on the x-axis of a fitting graph).
 
 # Conclusion
