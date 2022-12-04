@@ -24,13 +24,11 @@ Finally, with the world becoming increasingly digitalised, more data can be tied
 
 ## Data Exploration
 * **Data Overview**\
-The dataset contains transactions made by credit cards in September 2013 by European cardholders. This dataset presents transactions that occurred in two days, where we have 492 frauds out of 284,807 transactions. \
-It contains 30 numerical input variables (V1, V2 … V28, Time, Amount). \
-The variable ‘Class’ is the dependent variable (1 = fraud, 0 = not fraud) our model will predict.
+Firstly, the data was explored, identifying the number of features, what they mean, what our dependent variable should be, and if there's any imbalance.
 * **Duplicate Data Entries**\
-There are 1081 duplicate samples. This can be because of the lack of unique identyfiers in the database where the data was obtained. We will remove them because multiple identical samples can lead to biased model, which favors this subset of samples.
+Secondly, the dataset was checked for duplicate entries, and removed if any were found.
 * **Null Data**\
-Before scaling we checked if there were any null values because they don’t contribute to build the model and they can affect the performance. Fortunately, there is no null data.
+Thirdly, the dataset is checked for null values, and if encountered, the affected rows are dropped.
 
 ## Data Preprocessing
 * **Data Scaling**\
@@ -77,6 +75,18 @@ disp.plot()
 
 # Results
 
+## Data exploration
+* **Data Overview**\
+The dataset contains transactions made by credit cards in September 2013 by European cardholders. This dataset presents transactions that occurred in two days, where we have 492 frauds out of 284,807 transactions. \
+It contains 30 numerical input variables (V1, V2 … V28, Time, Amount). \
+The variable ‘Class’ is the dependent variable (1 = fraud, 0 = not fraud) our model will predict.
+* **Duplicate Data Entries**\
+There were 1081 duplicate samples, all of which were removed.
+* **Null Data**\
+No null data was encountered, therefore, no rows were dropped in this stage.
+
+## Preprocessing
+
 ## Model 1 - Logistic Regression
 * **Comparing Train and Test Error**\
 ![Logistic Regression Training Confusion Matrix](/assets/img/log_reg/log_reg_training_matrix.png)\
@@ -92,6 +102,9 @@ From the PCA-analysis, the fitting graph shows that using 7 principal components
 Using different degrees of polynomial features, it became evident that adding complexity using polynomial features only decreased training loss with test loss remaining largely the same. 
 
 # Discussion
+## Data exploration
+* **Data Overview**\
+This can be because of the lack of unique identyfiers in the database where the data was obtained. We will remove them because multiple identical samples can lead to biased model, which favors this subset of samples.
 
 ### Logistic regression
 The stark difference in error can be explained by the imbalanced nature of the input data, i.e., it contains way more non-fraudulent transactions than fraudulent ones.\
