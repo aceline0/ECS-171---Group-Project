@@ -111,12 +111,15 @@ From the PCA-analysis, the fitting graph shows that using 7 principal components
 Using different degrees of polynomial features, it became evident that adding complexity using polynomial features only decreased training loss with test loss remaining largely the same. 
 
 ## Model 2 - K-nearest neighbors
+* **Comparing Train and Test Error**\
+Starting with the training data, the model achieved a precision, recall and f1-score of 1.0 for class 0. For class 1, on the other hand, the values were 0.92, 0.78 and 0.85 respectively.\
+Moving on with the test data, precision, recall and f1-score for class 0 remained the same. However, precision went up to 0.99, recall down to 0.76 and in total the f1-score moved up to 0.86. The confusion matrix below shows the results of predicting the test data:
+![KNN test confusion matrix](/assets/img/knn/knn_test_confusion_matrix.png)
+* **The model's position on a fitting graph**\
 Starting with PCA, it was found that 13 was the optimal number of principal components (as seen in the fitting graph below).
 ![PCA fitting graph](/assets/img/knn/pca_fitting.png)
 Regarding the optimal k-value from a fitting-perspective, the value 7 optimized the model's performance.
 ![K-value optimization fitting graph](/assets/img/knn/kvalue_fitting.png)
-Evaluation
-
 
 # Discussion
 ## Data exploration
