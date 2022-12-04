@@ -36,8 +36,7 @@ Firstly, every feature was investigated to see if any transformation was needed.
 * **Feature Selection**\
 Secondly, kde-plots were used to determine how well each feature distinguished fraud and non-fraud. Furthermore, a correlation matrix was used to find the correlation between variables, and thereupon deciding to drop features not contributing to the prediction.
 * **Train Set, Test Set**\
-Remember that we have much more fraud data than non-fraud data. We choose to oversample the non-fraud data here. If we undersmaple, we will suffer the risk of losing important information since undersample means we only utilize a litte bit of the non-fraud data. In addition, compared to the whole dataset, the minority class does not have sufficient size. Therefore, we will oversample. Specifically, we will use 'SMOTE' (from online resources, ‘SMOTE’ may achieve higher recall). Recall is a good performance metric to our model because we want to detect as many fraud cases as possible to protect people's properties. It is awful if our model identifies a fraud case as a non-fraud case, and then people will lose money and they may need to contact the bank for further actions. \
-Notice that we will oversample the train set after train test split because we want to test the model on UNSEEN test data.
+Lastly, the dependent value's frequency is investigated, to decipher if over/undersampling would be needed before training a model.
 
 ## Models
 
@@ -93,7 +92,7 @@ Because of the imbalanced nature of the data, both an undersampled and oversampl
 Using kde plots and correlation matrices, it was inferred that Time, V13, V15, V22, V23,V24,V25,V26, V27,V28, Amount, V8, V21 cannot distinguish fraud cases and non-fraud cases well, and thus were dropped.
 
 * **Train Set, Test Set**\
-
+As previously mentioned, there's way more non-fraud data than fraud data. We choose to oversample the fraud data here. If we undersample, we will suffer the risk of losing important information since undersample means we only utilize a tiny fraction of the non-fraud data. In addition, compared to the whole dataset, the minority class does not have sufficient size. Therefore, we will oversample.
 
 ## Model 1 - Logistic Regression
 * **Comparing Train and Test Error**\
@@ -117,6 +116,10 @@ This can be because of the lack of unique identyfiers in the database where the 
 ## Preprocessing
 * **Data Scaling**\
  We can find out if frauds are more likely to happen at a spesific time of the day.\
+
+* **Train Set, Test Set**\
+Specifically, we will use 'SMOTE' (from online resources, ‘SMOTE’ may achieve higher recall). Recall is a good performance metric with our model since we want to detect as many fraud cases as possible to protect people's properties. It is awful if our model identifies a fraud case as a non-fraud case, and then people will lose money and they may need to contact the bank for further actions. \
+Notice that we will oversample the train set after train test split because we want to test the model on UNSEEN test data.
 
 ### Logistic regression
 The stark difference in error can be explained by the imbalanced nature of the input data, i.e., it contains way more non-fraudulent transactions than fraudulent ones.\
