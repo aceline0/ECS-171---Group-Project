@@ -20,49 +20,119 @@ The impact of implementing and having good models to detect financial (in this c
 
 Finally, with the world becoming increasingly digitalised, more data can be tied to each transaction. In machine learning, more data points and more features allows for better models, i.e., better detection of fraud. The future of finance will no doubt continue to become more data driven, why this project serves as a solid stepping stone for understanding how machine learning ties into tomorrow's systems.  
 
-# Data Exploration and Processing
+# Methods
+
+## Data Exploration
 * **Data Overview**\
-The dataset contains transactions made by credit cards in September 2013 by European cardholders. This dataset presents transactions that occurred in two days, where we have 492 frauds out of 284,807 transactions. \
-It contains 30 numerical input variables (V1, V2 … V28, Time, Amount). \
-The variable ‘Class’ is the dependent variable (1 = fraud, 0 = not fraud) our model will predict.
+Firstly, the data was explored, identifying the number of features, what they mean, what our dependent variable should be, and if there's any imbalance.
 * **Duplicate Data Entries**\
-There are 1081 duplicate samples. This can be because of the lack of unique identyfiers in the database where the data was obtained. We will remove them because multiple identical samples can lead to biased model, which favors this subset of samples.
+Secondly, the dataset was checked for duplicate entries, and removed if any were found.
 * **Null Data**\
-Before scaling we checked if there were any null values because they don’t contribute to build the model and they can affect the performance. Fortunately, there is no null data.
+Thirdly, the dataset is checked for null values, and if encountered, the affected rows are dropped.
+
+## Data Preprocessing
 * **Data Scaling**\
-The data ‘Time’ and ‘Amount’ have large numerical values, which are different from other features. \
-‘Time’ is the number of seconds elapsed between this transaction and the first transaction in the dataframe, spanning into 48 hours. We decide to add another column ‘Hour’ based on ‘Time’, as ‘Hour’ may show the peak period of credit card usage and its relation to the time of credit card fraud. We can find out if frauds are more likely to happen at a spesific time of the day.\
-Since the data are not normally distributed, we will perform normalization on the data and the variable now have values between 0 and 1 which makes them easier to compare in our further analysis.
+Firstly, every feature was investigated to see if any transformation was needed. Afterwards, using plots of each feature, it's decided what type of scaling to use, either standardization or min-max scaling.
 * **Feature Selection**\
-We have 31 features and we want to see how well these features help the model distinguish fraud and non-fraud.\
-We firstly use kde plots to visualize the each feature's distribution to fraud cases or non-fraud cases.\
-Secondly, we use correlation matrix plot to find the correlation between variables. Notice that  we have imbalance data about ‘Class’ in the original dataframe, the correlation matrix may come out biased or inaccurate. So we perform undersample and oversample on the dataframe, and then do the correlation matrix plot on both sampled dataframe. We want to how undersample and oversample will affect the correlation matrix.\
-Using kde plots and correlation matrix plots, we infer that Time, V13, V15, V22, V23,V24,V25,V26, V27,V28, Amount, V8, V21can not distinguish fraud cases and non-fraud cases well, and thus we will drop these features.
+Secondly, kde-plots were used to determine how well each feature distinguished fraud and non-fraud. Furthermore, a correlation matrix was used to find the correlation between variables, and thereupon deciding to drop features not contributing to the prediction.
 * **Train Set, Test Set**\
-Remember that we have much more fraud data than non-fraud data. We choose to oversample the non-fraud data here. If we undersmaple, we will suffer the risk of losing important information since undersample means we only utilize a litte bit of the non-fraud data. In addition, compared to the whole dataset, the minority class does not have sufficient size. Therefore, we will oversample. Specifically, we will use 'SMOTE' (from online resources, ‘SMOTE’ may achieve higher recall). Recall is a good performance metric to our model because we want to detect as many fraud cases as possible to protect people's properties. It is awful if our model identifies a fraud case as a non-fraud case, and then people will lose money and they may need to contact the bank for further actions. \
-Notice that we will oversample the train set after train test split because we want to test the model on UNSEEN test data.
+Lastly, the dependent value's frequency is investigated, to decipher if over/undersampling would be needed before training a model.
 
-# Model Building and Evaluation
-## First Model - Logistic Regression
-The first model used was Logistic Regression, with max_iterations set to 1200.
+## Models
 
+* **Model 1 - Logistic Regression**\
+The first model was [Logistic Regression](./code/firstModel.ipynb), with the hyperparameter max_iterations set to 1200. Two methods of altering complexity were used to find differences in the model's performance:
+  1. PCA - decreasing complexity through dimensionality reduction. The number of principal components used in training were 7.
+  2. Polynomial features - adding complexity by introducing more features. No polynomial features were added to training.
+
+* **Model 2 - K-Nearest Neighbors**\
+The second model used was [K-Nearest Neighbors](code/knn.ipynb) (KNN).
+
+* **Model 3 - Gaussian Naive Bayes**\
+The third model used was [Gaussian Naive Bayes](code/NaiveBayes.ipynb).
+
+## Evaluation
 In evaluating the train and test set, two methods of measuring model accuracy were used:
   1. Confusion Matrix
   2. Classification Report
 
+This was done using the built in methods in sklearn.metrics, as demonstrated below:
+```python
+from sklearn.metrics import classification_report
+from sklearn.metrics import confusion_matrix
+
+print(classification_report(y_test, yhat))
+cm = confusion_matrix(y_test, yhat)
+disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=['Non-fraud', 'Fraud'])
+disp.plot()
+```
+
+# Results
+
+## Data exploration
+* **Data Overview**\
+![Fraud count in the dataset](/assets/img/data_exp/fraud_count.png)
+The dataset contains transactions made by credit cards in September 2013 by European cardholders. This dataset presents transactions that occurred in two days, where we have 492 frauds out of 284,807 transactions. \
+It contains 30 numerical input variables (V1, V2 … V28, Time, Amount). \
+The variable ‘Class’ is the dependent variable (1 = fraud, 0 = not fraud) our model will predict.
+* **Duplicate Data Entries**\
+There were 1081 duplicate samples, all of which were removed.
+* **Null Data**\
+No null data was encountered, therefore, no rows were dropped in this stage.
+
+## Preprocessing
+* **Data Scaling**\
+It was found that the features ‘Time’ and ‘Amount’ have large numerical values, which are different from other features. \
+‘Time’ is the number of seconds elapsed between this transaction and the first transaction in the dataframe, spanning 48 hours. Therefore, another column ‘Hour’ was added, based on ‘Time’, as ‘Hour’ shows the peak period of credit card usage and its relation to the time of credit card fraud.
+Since the data is not normally distributed, min-max normalization on the data was done, resulting in the variables now having values between 0 and 1, simplifying further analysis.
+
+* **Feature Selection**\
+Because of the imbalanced nature of the data, both an undersampled and oversampled correlation matrix were investigated. It was found that they were similar, i.e., sampling had no affect on correlation between variables.\
+![Correlation Matrix](assets/img/data_exp/feature_corr.png)\
+Using kde plots and correlation matrices, it was inferred that Time, V13, V15, V22, V23,V24,V25,V26, V27,V28, Amount, V8, V21 cannot distinguish fraud cases and non-fraud cases well, and thus were dropped.
+
+* **Train Set, Test Set**\
+As previously mentioned, there's way more non-fraud data than fraud data. We choose to oversample the fraud data here. If we undersample, we will suffer the risk of losing important information since undersample means we only utilize a tiny fraction of the non-fraud data. In addition, compared to the whole dataset, the minority class does not have sufficient size. Therefore, we will oversample.
+
+## Model 1 - Logistic Regression
 * **Comparing Train and Test Error**\
+![Logistic Regression Training Confusion Matrix](/assets/img/log_reg/log_reg_training_matrix.png)\
 In the classification report for the training data, the precision was lower (91% compared to 97%) for class 0, whilst recall was higher (97% vs 90% for class 1). Regarding the f1-score they remained largely the same, with scores of 94% and 93% respectively.\
-Meanwhile, the test data's classification report showed a large difference in precision and recall for the two classes. Class 0 had a precision of 100% and a recall of 97%, whilst class 1 had a precision of 4% with a recall of 86%. The f1-scores were 98% and 8% respectively.\
+![Logistic Regression Training Confusion Matrix](/assets/img/log_reg/log_reg_test_matrix.png)\
+Meanwhile, the test data's classification report showed a large difference in precision and recall for the two classes. Class 0 had a precision of 100% and a recall of 97%, whilst class 1 had a precision of 4% with a recall of 86%. The f1-scores were 98% and 8% respectively.
+
+* **The model's position on a fitting graph**\
+As mentioned in the Methods section, two methods of altering complexity were used two find differnences in the model's performance: PCA, and Polynomial features.\
+![Logistic Regression PCA fitting graph](/assets/img/log_reg/logistic_regression_pca.png)\
+From the PCA-analysis, the fitting graph shows that using 7 principal components decreased the model's complexity adequatly whilst still retaining a low training/test loss.\
+![Polynomial Features fitting graph](/assets/img/log_reg/logistic_regression_poly_fitting.png)\
+Using different degrees of polynomial features, it became evident that adding complexity using polynomial features only decreased training loss with test loss remaining largely the same. 
+
+# Discussion
+## Data exploration
+* **Data Overview**\
+This can be because of the lack of unique identyfiers in the database where the data was obtained. We will remove them because multiple identical samples can lead to biased model, which favors this subset of samples.
+
+## Preprocessing
+* **Data Scaling**\
+ We can find out if frauds are more likely to happen at a spesific time of the day.\
+
+* **Train Set, Test Set**\
+Specifically, we will use 'SMOTE' (from online resources, ‘SMOTE’ may achieve higher recall). Recall is a good performance metric with our model since we want to detect as many fraud cases as possible to protect people's properties. It is awful if our model identifies a fraud case as a non-fraud case, and then people will lose money and they may need to contact the bank for further actions. \
+Notice that we will oversample the train set after train test split because we want to test the model on UNSEEN test data.
+
+### Logistic regression
 The stark difference in error can be explained by the imbalanced nature of the input data, i.e., it contains way more non-fraudulent transactions than fraudulent ones.\
 With a high recall being the most important metric in evaluating the model, and the test data having a recall of 84%, the conclusion was drawn that the model is not optimal for the classification problem at hand.
 
-* **The model's position on a fitting graph**\
-Two methods of altering complexity were used two find differnences in the model's performance: PCA, i.e., decreasing complexity by removing features, and Polynomial features, i.e., adding complexity by introducing more features.\
-From the PCA-analysis, the conclusion was drawn that using 7 principal components decreased the model's complexity adequatly whilst still retaining a low training/test loss.\
-Using different degrees of polynomial features, it became evident that adding complexity using polynomial features only decreased training loss with test loss remaining largely the same. Therefore, introducing polynomial features is inadequate, as it increases the model's risk of overfitting (pushing the model further out on the x-axis of a fitting graph).
+Therefore, introducing polynomial features is inadequate, as it increases the model's risk of overfitting (pushing the model further out on the x-axis of a fitting graph).
 
+# Conclusion
 
-References:
+# Collaboration
+Firstly, a general collaboration statement: All individuals were active in the group discord, providing input when questions arose, discussing choices of models, meeting times, workload distribution, etc.
+
+# References
 * https://stackoverflow.com/questions/55104819/display-count-on-top-of-seaborn-barplot
 * https://seaborn.pydata.org/generated/seaborn.kdeplot.html
 * https://stackoverflow.com/questions/69513501/seaborn-plot-displot-with-hue-and-dual-y-scale-twinx
