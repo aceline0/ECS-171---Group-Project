@@ -42,11 +42,13 @@ Lastly, the dependent value's frequency is investigated, to decipher if over/und
 
 * **Model 1 - Logistic Regression**\
 The first model was [Logistic Regression](./code/firstModel.ipynb), with the hyperparameter max_iterations set to 1200. Two methods of altering complexity were used to find differences in the model's performance:
-  1. PCA - decreasing complexity through dimensionality reduction. The number of principal components used in training were 7.
-  2. Polynomial features - adding complexity by introducing more features. No polynomial features were added to training.
+  1. PCA - decreasing complexity through dimensionality reduction.
+  2. Polynomial features - adding complexity by introducing more features.
 
 * **Model 2 - K-Nearest Neighbors**\
-The second model used was [K-Nearest Neighbors](code/knn.ipynb) (KNN).
+The second model used was [K-Nearest Neighbors](code/knn.ipynb) (KNN). Two parameters were investigated to plot fitting graphs:
+  1. PCA - decreasing complexity through dimensionality reduction.
+  2. K-value - testing different k-values (different number of neighbors)
 
 * **Model 3 - Gaussian Naive Bayes**\
 The third model used was [Gaussian Naive Bayes](code/NaiveBayes.ipynb).
@@ -71,7 +73,7 @@ disp.plot()
 
 ## Data exploration
 * **Data Overview**\
-![Fraud count in the dataset](/assets/img/data_exp/fraud_count.png)
+![Fraud count in the dataset](/assets/img/data_exp/fraud_count.png)\
 The dataset contains transactions made by credit cards in September 2013 by European cardholders. This dataset presents transactions that occurred in two days, where we have 492 frauds out of 284,807 transactions. \
 It contains 30 numerical input variables (V1, V2 … V28, Time, Amount). \
 The variable ‘Class’ is the dependent variable (1 = fraud, 0 = not fraud) our model will predict.
@@ -107,6 +109,14 @@ As mentioned in the Methods section, two methods of altering complexity were use
 From the PCA-analysis, the fitting graph shows that using 7 principal components decreased the model's complexity adequatly whilst still retaining a low training/test loss.\
 ![Polynomial Features fitting graph](/assets/img/log_reg/logistic_regression_poly_fitting.png)\
 Using different degrees of polynomial features, it became evident that adding complexity using polynomial features only decreased training loss with test loss remaining largely the same. 
+
+## Model 2 - K-nearest neighbors
+Starting with PCA, it was found that 13 was the optimal number of principal components (as seen in the fitting graph below).
+![PCA fitting graph](/assets/img/knn/pca_fitting.png)
+Regarding the optimal k-value from a fitting-perspective, the value 7 optimized the model's performance.
+![K-value optimization fitting graph](/assets/img/knn/kvalue_fitting.png)
+Evaluation
+
 
 # Discussion
 ## Data exploration
