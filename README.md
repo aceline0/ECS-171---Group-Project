@@ -22,7 +22,7 @@ Finally, with the world becoming increasingly digitalised, more data can be tied
 
 # Methods
 
-## Data Exploration
+### Data Exploration
 * **Data Overview**\
 Firstly, the data was explored, identifying the number of features, what they mean, what our dependent variable should be, and if there's any imbalance.
 * **Duplicate Data Entries**\
@@ -30,7 +30,7 @@ Secondly, the dataset was checked for duplicate entries, and removed if any were
 * **Null Data**\
 Thirdly, the dataset is checked for null values, and if encountered, the affected rows are dropped.
 
-## Data Preprocessing
+### Data Preprocessing
 * **Data Scaling**\
 Firstly, every feature was investigated to see if any transformation was needed. Afterwards, using plots of each feature, it's decided what type of scaling to use, either standardization or min-max scaling.
 * **Feature Selection**\
@@ -38,7 +38,7 @@ Secondly, kde-plots were used to determine how well each feature distinguished f
 * **Train Set, Test Set**\
 Lastly, the dependent value's frequency is investigated, to decipher if over/undersampling would be needed before training a model.
 
-## Models
+### Models
 
 * **Model 1 - Logistic Regression**\
 The first model was [Logistic Regression](./code/firstModel.ipynb), with the hyperparameter max_iterations set to 1200. Two methods of altering complexity were used to find differences in the model's performance:
@@ -53,7 +53,7 @@ The second model used was [K-Nearest Neighbors](code/knn.ipynb) (KNN). Two param
 * **Model 3 - Gaussian Naive Bayes**\
 The third model used was [Gaussian Naive Bayes](code/NaiveBayes.ipynb).
 
-## Evaluation
+### Evaluation
 In evaluating the train and test set, two methods of measuring model accuracy were used:
   1. Confusion Matrix
   2. Classification Report
@@ -71,7 +71,7 @@ disp.plot()
 
 # Results
 
-## Data exploration
+### Data exploration
 * **Data Overview**\
 ![Fraud count in the dataset](/assets/img/data_exp/fraud_count.png)\
 The dataset contains transactions made by credit cards in September 2013 by European cardholders. This dataset presents transactions that occurred in two days, where we have 492 frauds out of 284,807 transactions. \
@@ -82,7 +82,7 @@ There were 1081 duplicate samples, all of which were removed.
 * **Null Data**\
 No null data was encountered, therefore, no rows were dropped in this stage.
 
-## Preprocessing
+### Preprocessing
 * **Data Scaling**\
 It was found that the features ‘Time’ and ‘Amount’ have large numerical values, which are different from other features. \
 ‘Time’ is the number of seconds elapsed between this transaction and the first transaction in the dataframe, spanning 48 hours. Therefore, another column ‘Hour’ was added, based on ‘Time’, as ‘Hour’ shows the peak period of credit card usage and its relation to the time of credit card fraud.
@@ -96,7 +96,7 @@ Using kde plots and correlation matrices, it was inferred that Time, V13, V15, V
 * **Train Set, Test Set**\
 As previously mentioned, there's way more non-fraud data than fraud data. We choose to oversample the fraud data here. If we undersample, we will suffer the risk of losing important information since undersample means we only utilize a tiny fraction of the non-fraud data. In addition, compared to the whole dataset, the minority class does not have sufficient size. Therefore, we will oversample.
 
-## Model 1 - Logistic Regression
+### Model 1 - Logistic Regression
 * **Comparing Train and Test Error**\
 ![Logistic Regression Training Confusion Matrix](/assets/img/log_reg/log_reg_training_matrix.png)\
 In the classification report for the training data, the precision was lower (91% compared to 97%) for class 0, whilst recall was higher (97% vs 90% for class 1). Regarding the f1-score they remained largely the same, with scores of 94% and 93% respectively.\
@@ -110,7 +110,7 @@ From the PCA-analysis, the fitting graph shows that using 7 principal components
 ![Polynomial Features fitting graph](/assets/img/log_reg/logistic_regression_poly_fitting.png)\
 Using different degrees of polynomial features, it became evident that adding complexity using polynomial features only decreased training loss with test loss remaining largely the same. 
 
-## Model 2 - K-nearest neighbors
+### Model 2 - K-nearest neighbors
 * **Comparing Train and Test Error**\
 Starting with the training data, the model achieved a precision, recall and f1-score of 1.0 for class 0. For class 1, on the other hand, the values were 0.92, 0.78 and 0.85 respectively.\
 Moving on with the test data, precision, recall and f1-score for class 0 remained the same. However, precision went up to 0.99, recall down to 0.76 and in total the f1-score moved up to 0.86. The confusion matrix below shows the results of predicting the test data:
@@ -122,11 +122,10 @@ Regarding the optimal k-value from a fitting-perspective, the value 7 optimized 
 ![K-value optimization fitting graph](/assets/img/knn/kvalue_fitting.png)
 
 # Discussion
-## Data exploration
-* **Data Overview**\
-This can be because of the lack of unique identyfiers in the database where the data was obtained. We will remove them because multiple identical samples can lead to biased model, which favors this subset of samples.
+### Data exploration
+During the exploration stage, it was found that we had no null data. This is of course possible, however, one could say that it is unlikely. Real-world data is messy, and this dataset had already been processed (with the null data dropped). However, encountering duplicate data entries, and thereby having to remove these, strengthened the validity of the dataset. This was done since multiple identical samples can lead to a biased model, something you always want to lower in a model. Finally, the anonymization of the feature names increased the difficulty of drawing conclusions from our findings. However, this is expected since it is real world data, and consumers privacy is in question. 
 
-## Preprocessing
+### Preprocessing
 * **Data Scaling**\
  We can find out if frauds are more likely to happen at a spesific time of the day.\
 
