@@ -88,8 +88,14 @@ Two methods of altering complexity were used two find differnences in the model'
 From the PCA-analysis, the conclusion was drawn that using 7 principal components decreased the model's complexity adequatly whilst still retaining a low training/test loss.\
 Using different degrees of polynomial features, it became evident that adding complexity using polynomial features only decreased training loss with test loss remaining largely the same. Therefore, introducing polynomial features is inadequate, as it increases the model's risk of overfitting (pushing the model further out on the x-axis of a fitting graph).
 
+# Discussion
 
-References:
+# Conclusion
+
+# Collaboration
+Firstly, a general collaboration statement: All individuals were active in the group discord, providing input when questions arose, discussing choices of models, meeting times, workload distribution, etc.
+
+# References
 * https://stackoverflow.com/questions/55104819/display-count-on-top-of-seaborn-barplot
 * https://seaborn.pydata.org/generated/seaborn.kdeplot.html
 * https://stackoverflow.com/questions/69513501/seaborn-plot-displot-with-hue-and-dual-y-scale-twinx
