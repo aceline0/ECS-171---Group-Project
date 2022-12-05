@@ -14,11 +14,11 @@ The folder `code/` contains the different notesbooks and python scripts for the 
 
 Sadly, finance and fraud are two words that are deeply intertwined. When there is substantial monetary gain available, malicious actors will attempt to carve out a piece. Ever since the Diner Club's card in 1951, the convenience presented by credit cards has led to substantial growth, so much so that in 2021, 581 billion credit card transactions were processed.  
 
-When choosing a dataset to work on, it seemed natural to pick an area with which we were familiar. Since almost everyone carries a credit card, both interpreting the data and understanding important metrics to measure came naturally. What is most fascinating with the dataset is its real-world applicability, meaning, what we are learning in this course is being applied to solve a real (big!) problem. However, it comes with its trade-offs, mainly that all features are anonymized, named v1-v28 (making it more difficult to draw conclusions).  
+When choosing a dataset to work on, it seemed natural to pick an area with which we were familiar. Since almost everyone carries a credit card, both interpreting the data and understanding important metrics to measure came naturally. What is most fascinating with the dataset is its real-world applicability, meaning what we are learning in this course is being applied to solve a real (big!) problem. However, it comes with its trade-offs, mainly that all features are anonymized, named v1-v28, making it more difficult to draw conclusions.  
 
-The impact of implementing and having good models to detect financial (in this case credit card) fraud is broad. If a model can detect a criminal's transactions, huge societal problems, e.g., money laundering, can be thwarted. Furthermore, fraudulent transactions are a cost for the banks/institutions handling it, meaning it shows up as a cost on their income statement, something more often than not pushed down to consumers (us), in the form of higher transaction fees / higher interest rates etc.  
+The impact of implementing and having good models to detect financial fraud is broad. If a model can detect a criminal's transactions, huge societal problems, e.g., money laundering, can be thwarted. Furthermore, fraudulent transactions are a cost for the banks/institutions handling it, meaning it shows up as a cost on their income statement, something more often than not pushed down to consumers (us), in the form of higher transaction fees / higher interest rates etc.  
 
-Finally, with the world becoming increasingly digitalised, more data can be tied to each transaction. In machine learning, more data points and more features allows for better models, i.e., better detection of fraud. The future of finance will no doubt continue to become more data driven, why this project serves as a solid stepping stone for understanding how machine learning ties into tomorrow's systems.  
+Finally, with the world becoming increasingly digitalised, more data can be tied to each transaction. In machine learning, more data points and more features allows for better models, i.e., better detection of fraud. The future of finance will no doubt continue to become more data driven, which is why this project serves as a solid stepping stone for understanding how machine learning ties into tomorrow's systems.  
 
 # Methods
 
@@ -37,6 +37,7 @@ Firstly, every feature was investigated to see if any transformation was needed.
 Secondly, kde-plots were used to determine how well each feature distinguished fraud and non-fraud. Furthermore, a correlation matrix was used to find the correlation between variables, and thereupon deciding to drop features not contributing to the prediction.
 * **Train Set, Test Set**\
 Lastly, the dependent value's frequency is investigated, to decipher if over/undersampling would be needed before training a model.
+The preprocessing was added to a seperate file as running the data exploration in the beginning of working on a new model inefficient.
 
 ### Models
 
@@ -107,6 +108,7 @@ Meanwhile, the test data's classification report showed a large difference in pr
 As mentioned in the Methods section, two methods of altering complexity were used two find differnences in the model's performance: PCA, and Polynomial features.\
 ![Logistic Regression PCA fitting graph](/assets/img/log_reg/logistic_regression_pca.png)\
 From the PCA-analysis, the fitting graph shows that using 7 principal components decreased the model's complexity adequatly whilst still retaining a low training/test loss.\
+
 ![Polynomial Features fitting graph](/assets/img/log_reg/logistic_regression_poly_fitting.png)\
 Using different degrees of polynomial features, it became evident that adding complexity using polynomial features only decreased training loss with test loss remaining largely the same. 
 
@@ -117,7 +119,8 @@ Moving on with the test data, precision, recall and f1-score for class 0 remaine
 ![KNN test confusion matrix](/assets/img/knn/knn_test_confusion_matrix.png)
 * **The model's position on a fitting graph**\
 Starting with PCA, it was found that 13 was the optimal number of principal components (as seen in the fitting graph below).
-![PCA fitting graph](/assets/img/knn/pca_fitting.png)
+![PCA fitting graph](/assets/img/knn/pca_fitting.png)\
+
 Regarding the optimal k-value from a fitting-perspective, the value 7 optimized the model's performance.
 ![K-value optimization fitting graph](/assets/img/knn/kvalue_fitting.png)
 
@@ -146,21 +149,21 @@ With a high recall being the most important metric in evaluating the model, and 
 ### K-nearest neighbors
 As the results presented, the model had a 99% precision on test data, with only one false positive (meaning this figure was obtained by taking 1/(68+1)). This shows the problem presented by unbalanced data, especially with very few positives of our dependent variable. As mentioned in the preprocessing discussion, this ties back to real data being messy, and the model did the best it could with the data at hand.
 
-With a test recall of 0.76 compared to 0.86 for linear regression, shows it’s not as suited for this type of classification. However, the stark increase in precision is impressive, and could probably same time in overhead (meaning, not as many false positives, implies less work for the department investigating all flagged transactions).
+With a test recall of 0.76 compared to 0.86 for logistic regression, shows it is not as suited for this type of classification. However, the stark increase in precision is impressive, and could probably same time in overhead (meaning, not as many false positives, implies less work for the department investigating all flagged transactions).
 
 ### Naive Bayes
-Since the model has a .77 recall on class 1, it was able to identify a significant amount of the fraudulent transactions. However with a precision of .06 it is simply finding a lot of false positives, since only 6% of classified frauds are actually true positives. The model would likely be more effective if given more fraudulent data to train on, however as it currently stands it would not be effective in production since it would produce too many false positives.
+Since the model has a 77% test recall on class 1, it was able to identify a significant amount of the fraudulent transactions. However with a precision of .06 it is simply finding a lot of false positives, since only 6% of classified frauds are actually true positives. The model would likely be more effective if given more fraudulent data to train on, however as it currently stands, it would not be effective in production since it would produce too many false positives.
 
 Comparing this naive bayesian to our previous models, this model had the lowest recall score. The model is therefore less suited for predicting credit card fraud. On the other hand, the precision is higher than the logistic model (4%) but a lot less than for KNN (26%). 
 
 # Conclusion
-First of all, since none of the models provided a high recall (the highest being 0.86 with the linear regression), we believe there might be some model out there that is better suited for the problem at hand - and that we simply have not found it. From this, there are quite a few future direction that could improve the results of this study.
+First of all, since none of the models provided a high recall (the highest being 0.86 with the logistic regression), we believe there might is model out there that is better suited for the problem at hand - and that we simply have not found it. --- However, our logistic model can be used in the awarness of the model evaluation. High recall is crucial when, as mentioned, the consequences for predicting non-fraud for a transaction that is actually fraud are has a higher cost than predicting fraud when there is no fraud. ----From this, there are quite a few future direction that could improve the results of this study.
 
-Firstly, trying out more models, e.g., decision tree, neural networks, etc., would greatly increase the odds of finding one that could achieve a higher recall. With neural networks, multiple hyperparameters can be tuned (number of hidden layers, activation functions, number of nodes, batch size, number of epochs, etc.), where one combination of these would probably yield a better result than we found.
+Firstly, trying out more models, e.g., decision tree, neural networks, etc., would greatly increase the odds of finding one that could achieve a higher recall. With neural networks, multiple hyperparameters can be tuned (number of hidden layers, activation functions, number of nodes, batch size, number of epochs), where one combination of these would probably yield a better result than we found.
 
 Secondly, time could be spent improving the dataset at hand. As previously discussed, the unbalanced nature of the dataset impacted the models' performances. If possible, finding a dataset with many more fraudulent transactions would give a better foundation upon which research could be conducted.
 
-Thirdly, an ensamble of models could be tried, to see if we somehow could get the precision of the KNN, and the recall of the logistic regression (or some other models with better accuracy), and from the concatenation of these predictions obtain a new predicted value resulting in a better performance.
+Thirdly, an ensamble of models could be tried, to see if we can get the precision of the KNN, and the recall of the logistic regression (or some other models with better accuracy) From the concatenation of these predictions, we could obtain a new predicted value resulting in a better performance.
 
 To round up, this project opened our eyes to problems data scientists encounter in the real world, exposing us to nuances in machine learning only listening to lectures and taking tests never would be able to depict properly. With these newfound insights, if we were to conduct research on another dataset, they would surely come in handy, saving time and allowing us to reach more useful conclusions in a shorter timeframe.
 
@@ -169,6 +172,8 @@ First of all, a general collaboration statement: All individuals were active in 
 
 * **Kevin Rasmusson (Writing, code contribution to KNN)**\
 Writeup: Wrote introduction, discussion (not the part on naive bayes), conclusion, reformulations and contributions to the methods section, first model spell check. Added images, separated method/result/discussion for every subsection (preprocessing, exploration, models 1-3). Did the first draft of the KNN model (only training) and added comments to the code.
+* **Celine Nygaard Weiseth (Writing, code contribution to Naive Bayes)**\
+Wrote method and results for the naive bayes model, contribution on the naive bayes code part, added and fixed spelling in preprosseing, filled in on conclusion. Took initiative to create a discord server that worked well for communicating as all group member have been responsive. It was used for discussing ideas and general improvements.
 
 # References
 * https://stackoverflow.com/questions/55104819/display-count-on-top-of-seaborn-barplot
