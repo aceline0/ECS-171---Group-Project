@@ -173,7 +173,8 @@ First of all, a general collaboration statement: All individuals were active in 
 * **Kevin Rasmusson (Writing, code contribution to KNN)**\
 Writeup: Wrote introduction, discussion (not the part on naive bayes), conclusion, reformulations and contributions to the methods section, first model spell check. Added images, separated method/result/discussion for every subsection (preprocessing, exploration, models 1-3). Did the first draft of the KNN model (only training) and added comments to the code.
 * **Celine Nygaard Weiseth (Writing, code contribution to Naive Bayes)**\
-Wrote method and results for the naive bayes model, contribution on the naive bayes code part, added and fixed spelling in preprosseing, filled in on conclusion. Took initiative to create a discord server that worked well for communicating as all group member have been responsive. It was used for discussing ideas and general improvements.
+Wrote method and results for the naive bayes model, contribution on the naive bayes code part, added and fixed spelling in preprosseing, filled in on conclusion. Took initiative to create a discord server that worked well for communicating as all group member have been responsive. 
+
 
 # References
 * https://stackoverflow.com/questions/55104819/display-count-on-top-of-seaborn-barplot
