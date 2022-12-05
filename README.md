@@ -129,10 +129,16 @@ During the exploration stage, it was found that we had no null data. This is of 
 In this step, by transforming the 'Time' category, we were able to find out (and model upon) if frauds were more likely to happen at a specific time of the day. In contrast to the data exploration, this showed the thesis that "real data is messy", but that clever transformations can make it "less messy" and actually useful! Regarding the oversampling, 'SMOTE' was used, mainly beacuse it is a type of sampling that may achieve a higher recall. Recall is an important performance metric with our model since we want to detect as many fraud cases as possible to protect people's money. It is awful if our model identifies a fraud case as a non-fraud case, because this will lead to people losing money and having to contact their payment processor to get it resolved. Finally, this oversampling was only conducted post train test split, since testing the model should be done on unseen data, i.e., non-oversampled.
 
 ### Logistic regression
+Firstly, introducing polynomial features was deemed inadequate, as it increases the model's risk of overfitting (pushing the model further out on the x-axis of a fitting graph).\
 The stark difference in error can be explained by the imbalanced nature of the input data, i.e., it contains way more non-fraudulent transactions than fraudulent ones.\
-With a high recall being the most important metric in evaluating the model, and the test data having a recall of 84%, the conclusion was drawn that the model is not optimal for the classification problem at hand.
+With a high recall being the most important metric in evaluating the model, and the test data having a recall of 84%, the conclusion was drawn that the model fairly good at classifying fraudulent transactions, however, not optimal for the classification problem at hand.
 
-Therefore, introducing polynomial features is inadequate, as it increases the model's risk of overfitting (pushing the model further out on the x-axis of a fitting graph).
+### K-nearest neighbors
+As the results presented, the model had a 99% precision on test data, with only one false positive (meaning this figure was obtained by taking 1/(68+1)). This shows the problem presented by unbalanced data, especially with very few positives of our dependent variable. As mentioned in the preprocessing discussion, this ties back to real data being messy, and the model did the best it could with the data at hand.\
+With a test recall of 0.76 compared to 0.86 for linear regression, shows it’s not as suited for this type of classification. However, the stark increase in precision is impressive, and could probably same time in overhead (meaning, not as many false positives, implies less work for the department investigating all flagged transactions).
+
+### Naive Bayes
+Since the model has a .77 recall on class 1, it was able to identify a significant amount of the fraudulent transactions. However with a precision of .06 it is simply finding a lot of false positives, since only 6% of classified frauds are actually true positives. The model would likely be more effective if given more fraudulent data to train on, however as it currently stands it would not be effective in production since it would produce too many false positives.
 
 # Conclusion
 
