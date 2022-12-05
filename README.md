@@ -176,6 +176,8 @@ Writeup: Wrote introduction, discussion (not the part on naive bayes), conclusio
 Wrote method and results for the naive bayes model, contribution on the naive bayes code part, added and fixed spelling in preprocessing, filled in on conclusion. Took initiative to create a discord server that worked well for communicating as all group member have been responsive. 
 * **Andrea Rodriguez (Writing, Gave Feedback and Suggestions)**\
 Organized and shared google docs for the writeup. Wrote train and error results for some models. Gave suggestions to use naive bayes on the last model and also gave feedback when needed. 
+* **Hongye Xu (Writing, code contribution to data exploration, processing and fitting graph of the model)**\
+Coded and wrote the documentation of the data exploration and processing step, contributed ideas on and coded how to increase/decrease the complexity of the model, and coded the fitting graph.
 
 
 # References
