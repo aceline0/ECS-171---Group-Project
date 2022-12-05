@@ -126,12 +126,7 @@ Regarding the optimal k-value from a fitting-perspective, the value 7 optimized 
 During the exploration stage, it was found that we had no null data. This is of course possible, however, one could say that it is unlikely. Real-world data is messy, and this dataset had already been processed (with the null data dropped). However, encountering duplicate data entries, and thereby having to remove these, strengthened the validity of the dataset. This was done since multiple identical samples can lead to a biased model, something you always want to lower in a model. Finally, the anonymization of the feature names increased the difficulty of drawing conclusions from our findings. However, this is expected since it is real world data, and consumers privacy is in question. 
 
 ### Preprocessing
-* **Data Scaling**\
- We can find out if frauds are more likely to happen at a spesific time of the day.\
-
-* **Train Set, Test Set**\
-Specifically, we will use 'SMOTE' (from online resources, ‘SMOTE’ may achieve higher recall). Recall is a good performance metric with our model since we want to detect as many fraud cases as possible to protect people's properties. It is awful if our model identifies a fraud case as a non-fraud case, and then people will lose money and they may need to contact the bank for further actions. \
-Notice that we will oversample the train set after train test split because we want to test the model on UNSEEN test data.
+In this step, by transforming the 'Time' category, we were able to find out (and model upon) if frauds were more likely to happen at a specific time of the day. In contrast to the data exploration, this showed the thesis that "real data is messy", but that clever transformations can make it "less messy" and actually useful! Regarding the oversampling, 'SMOTE' was used, mainly beacuse it is a type of sampling that may achieve a higher recall. Recall is an important performance metric with our model since we want to detect as many fraud cases as possible to protect people's money. It is awful if our model identifies a fraud case as a non-fraud case, because this will lead to people losing money and having to contact their payment processor to get it resolved. Finally, this oversampling was only conducted post train test split, since testing the model should be done on unseen data, i.e., non-oversampled.
 
 ### Logistic regression
 The stark difference in error can be explained by the imbalanced nature of the input data, i.e., it contains way more non-fraudulent transactions than fraudulent ones.\
