@@ -121,7 +121,7 @@ Starting with PCA, it was found that 13 was the optimal number of principal comp
 Regarding the optimal k-value from a fitting-perspective, the value 7 optimized the model's performance.
 ![K-value optimization fitting graph](/assets/img/knn/kvalue_fitting.png)
 
-## Model 3 - Naive Bayes
+### Model 3 - Naive Bayes
 * **Comparing Train and Test Error**\
 In the classification report for both training data and test data, Class 0 and Class 1 had varying scores for precision, recall, and f1-score. For the train data these were 98%, 84% and 90% respectively. For the test data we had 6% precision, 77% recall and 11% f1-score. The accuracy score for both the training data and test data is similar with the accuracy of the training data being 91% and 98% for test data. 
 * **The model's position on a fitting graph**\
@@ -149,7 +149,10 @@ Since the model has a .77 recall on class 1, it was able to identify a significa
 # Conclusion
 
 # Collaboration
-Firstly, a general collaboration statement: All individuals were active in the group discord, providing input when questions arose, discussing choices of models, meeting times, workload distribution, etc.
+Firstly, a general collaboration statement: All individuals were active in the group discord, providing input when questions arose, discussing choices of models, meeting times, workload distribution, etc. No roles were assigned in the beginning of the project, however, each collaboration statement should serve as a pointer to each person's main focus.
+
+* **Kevin Rasmusson (Writing, code contribution to KNN)**\
+Writeup: Wrote introduction, discussion (not the part on naive bayes), conclusion, reformulations and contributions to the methods section, first model spell check. Added images, separated method/result/discussion for every subsection (preprocessing, exploration, models 1-3). Did the first draft of the KNN model (only training) and added comments to the code.
 
 # References
 * https://stackoverflow.com/questions/55104819/display-count-on-top-of-seaborn-barplot
