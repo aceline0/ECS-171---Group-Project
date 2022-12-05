@@ -121,6 +121,9 @@ Starting with PCA, it was found that 13 was the optimal number of principal comp
 Regarding the optimal k-value from a fitting-perspective, the value 7 optimized the model's performance.
 ![K-value optimization fitting graph](/assets/img/knn/kvalue_fitting.png)
 
+## Model 3 - Naive Bayes
+In the classification report for both training data and test data, Class 0 and Class 1 had varying scores for precision, recall, and f1-score. For the train data these were 98%, 84% and 90% respectively. For the test data we had 6% precision, 77% recall and 11% f1-score. The accuracy score for both the training data and test data is similar with the accuracy of the training data being 91% and 98% for test data. 
+
 # Discussion
 ## Data exploration
 * **Data Overview**\
