@@ -51,7 +51,7 @@ The second model used was [K-Nearest Neighbors](code/knn.ipynb) (KNN). Two param
   2. K-value - testing different k-values (different number of neighbors)
 
 * **Model 3 - Gaussian Naive Bayes**\
-The third model used was [Gaussian Naive Bayes](code/NaiveBayes.ipynb).
+The third model used was [Gaussian Naive Bayes](code/NaiveBayes.ipynb). No complexity analysis was done for this model.
 
 ### Evaluation
 In evaluating the train and test set, two methods of measuring model accuracy were used:
@@ -121,10 +121,10 @@ Starting with PCA, it was found that 13 was the optimal number of principal comp
 Regarding the optimal k-value from a fitting-perspective, the value 7 optimized the model's performance.
 ![K-value optimization fitting graph](/assets/img/knn/kvalue_fitting.png)
 
-## Model 3 - Naive Bayes
+### Model 3 - Naive Bayes
 * **Comparing Train and Test Error**\
 In the classification report for both training data and test data, Class 0 and Class 1 had varying scores for precision, recall, and f1-score. For the train data these were 98%, 84% and 90% respectively. For the test data we had 6% precision, 77% recall and 11% f1-score. The accuracy score for both the training data and test data is similar with the accuracy of the training data being 91% and 98% for test data. 
-* **The model's position on a fitting graph**\
+![Confusion matrix NB test data](/assets/img/nb/cm_test.png)
 
 
 # Discussion
@@ -132,24 +132,43 @@ In the classification report for both training data and test data, Class 0 and C
 During the exploration stage, it was found that we had no null data. This is of course possible, however, one could say that it is unlikely. Real-world data is messy, and this dataset had already been processed (with the null data dropped). However, encountering duplicate data entries, and thereby having to remove these, strengthened the validity of the dataset. This was done since multiple identical samples can lead to a biased model, something you always want to lower in a model. Finally, the anonymization of the feature names increased the difficulty of drawing conclusions from our findings. However, this is expected since it is real world data, and consumers privacy is in question. 
 
 ### Preprocessing
-In this step, by transforming the 'Time' category, we were able to find out (and model upon) if frauds were more likely to happen at a specific time of the day. In contrast to the data exploration, this showed the thesis that "real data is messy", but that clever transformations can make it "less messy" and actually useful! Regarding the oversampling, 'SMOTE' was used, mainly beacuse it is a type of sampling that may achieve a higher recall. Recall is an important performance metric with our model since we want to detect as many fraud cases as possible to protect people's money. It is awful if our model identifies a fraud case as a non-fraud case, because this will lead to people losing money and having to contact their payment processor to get it resolved. Finally, this oversampling was only conducted post train test split, since testing the model should be done on unseen data, i.e., non-oversampled.
+In this step, by transforming the 'Time' category, we were able to find out (and model upon) if frauds were more likely to happen at a specific time of the day. In contrast to the data exploration, this showed the thesis that "real data is messy", but that clever transformations can make it "less messy" and actually useful!
+
+Regarding the oversampling, 'SMOTE' was used, mainly beacuse it is a type of sampling that may achieve a higher recall. Recall is an important performance metric with our model since we want to detect as many fraud cases as possible to protect people's money. It is awful if our model identifies a fraud case as a non-fraud case, because this will lead to people losing money and having to contact their payment processor to get it resolved. Finally, this oversampling was only conducted post train test split, since testing the model should be done on unseen data, i.e., non-oversampled.
 
 ### Logistic regression
-Firstly, introducing polynomial features was deemed inadequate, as it increases the model's risk of overfitting (pushing the model further out on the x-axis of a fitting graph).\
-The stark difference in error can be explained by the imbalanced nature of the input data, i.e., it contains way more non-fraudulent transactions than fraudulent ones.\
+Firstly, introducing polynomial features was deemed inadequate, as it increases the model's risk of overfitting (pushing the model further out on the x-axis of a fitting graph).
+
+The stark difference in error can be explained by the imbalanced nature of the input data, i.e., it contains way more non-fraudulent transactions than fraudulent ones.
+
 With a high recall being the most important metric in evaluating the model, and the test data having a recall of 84%, the conclusion was drawn that the model fairly good at classifying fraudulent transactions, however, not optimal for the classification problem at hand.
 
 ### K-nearest neighbors
-As the results presented, the model had a 99% precision on test data, with only one false positive (meaning this figure was obtained by taking 1/(68+1)). This shows the problem presented by unbalanced data, especially with very few positives of our dependent variable. As mentioned in the preprocessing discussion, this ties back to real data being messy, and the model did the best it could with the data at hand.\
+As the results presented, the model had a 99% precision on test data, with only one false positive (meaning this figure was obtained by taking 1/(68+1)). This shows the problem presented by unbalanced data, especially with very few positives of our dependent variable. As mentioned in the preprocessing discussion, this ties back to real data being messy, and the model did the best it could with the data at hand.
+
 With a test recall of 0.76 compared to 0.86 for linear regression, shows it’s not as suited for this type of classification. However, the stark increase in precision is impressive, and could probably same time in overhead (meaning, not as many false positives, implies less work for the department investigating all flagged transactions).
 
 ### Naive Bayes
 Since the model has a .77 recall on class 1, it was able to identify a significant amount of the fraudulent transactions. However with a precision of .06 it is simply finding a lot of false positives, since only 6% of classified frauds are actually true positives. The model would likely be more effective if given more fraudulent data to train on, however as it currently stands it would not be effective in production since it would produce too many false positives.
 
+Comparing this naive bayesian to our previous models, this model had the lowest recall score. The model is therefore less suited for predicting credit card fraud. On the other hand, the precision is higher than the logistic model (4%) but a lot less than for KNN (26%). 
+
 # Conclusion
+First of all, since none of the models provided a high recall (the highest being 0.86 with the linear regression), we believe there might be some model out there that is better suited for the problem at hand - and that we simply have not found it. From this, there are quite a few future direction that could improve the results of this study.
+
+Firstly, trying out more models, e.g., decision tree, neural networks, etc., would greatly increase the odds of finding one that could achieve a higher recall. With neural networks, multiple hyperparameters can be tuned (number of hidden layers, activation functions, number of nodes, batch size, number of epochs, etc.), where one combination of these would probably yield a better result than we found.
+
+Secondly, time could be spent improving the dataset at hand. As previously discussed, the unbalanced nature of the dataset impacted the models' performances. If possible, finding a dataset with many more fraudulent transactions would give a better foundation upon which research could be conducted.
+
+Thirdly, an ensamble of models could be tried, to see if we somehow could get the precision of the KNN, and the recall of the logistic regression (or some other models with better accuracy), and from the concatenation of these predictions obtain a new predicted value resulting in a better performance.
+
+To round up, this project opened our eyes to problems data scientists encounter in the real world, exposing us to nuances in machine learning only listening to lectures and taking tests never would be able to depict properly. With these newfound insights, if we were to conduct research on another dataset, they would surely come in handy, saving time and allowing us to reach more useful conclusions in a shorter timeframe.
 
 # Collaboration
-Firstly, a general collaboration statement: All individuals were active in the group discord, providing input when questions arose, discussing choices of models, meeting times, workload distribution, etc.
+First of all, a general collaboration statement: All individuals were active in the group discord, providing input when questions arose, discussing choices of models, meeting times, workload distribution, etc. No roles were assigned in the beginning of the project, however, each collaboration statement should serve as a pointer to each person's main focus.
+
+* **Kevin Rasmusson (Writing, code contribution to KNN)**\
+Writeup: Wrote introduction, discussion (not the part on naive bayes), conclusion, reformulations and contributions to the methods section, first model spell check. Added images, separated method/result/discussion for every subsection (preprocessing, exploration, models 1-3). Did the first draft of the KNN model (only training) and added comments to the code.
 
 # References
 * https://stackoverflow.com/questions/55104819/display-count-on-top-of-seaborn-barplot
