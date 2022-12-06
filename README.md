@@ -178,6 +178,8 @@ Wrote method and results for the naive bayes model, contribution on the naive ba
 Organized and shared google docs for the writeup. Wrote train and error results for some models. Gave suggestions to use naive bayes on the last model and also gave feedback when needed. 
 * **Hongye Xu (Writing, code contribution to data exploration, processing and fitting graph of the model)**\
 Coded and wrote the documentation of the data exploration and processing step, contributed ideas on and coded how to increase/decrease the complexity of the model, and coded the fitting graph.
+* **Javier Sande (Code contribution to processing, Logistic Regression and KNN)
+Coded the training of the first model and the optimization and visualization methods in the first model and KNN. Gave and implemented suggestions on how to optimize the results by tuning parameters. Gave suggestions on the interpretation of the results and how they might be applied to the next steps.
 
 
 # References
