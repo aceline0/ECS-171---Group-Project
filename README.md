@@ -73,61 +73,86 @@ disp.plot()
 # Results
 
 ### Data exploration
-* **Data Overview**\
-![Fraud count in the dataset](/assets/img/data_exp/fraud_count.png)\
-The dataset contains transactions made by credit cards in September 2013 by European cardholders. This dataset presents transactions that occurred in two days, where we have 492 frauds out of 284,807 transactions. \
-It contains 30 numerical input variables (V1, V2 … V28, Time, Amount). \
-The variable ‘Class’ is the dependent variable (1 = fraud, 0 = not fraud) our model will predict.
+* **Data Overview**
+
+  ![Fraud count in the dataset](/assets/img/data_exp/fraud_count.png)
+
+  The dataset contains transactions made by credit cards in September 2013 by European cardholders. This dataset presents transactions that occurred in two days, where we have 492 frauds out of 284,807 transactions. \
+  It contains 30 numerical input variables (V1, V2 … V28, Time, Amount). \
+  The variable ‘Class’ is the dependent variable (1 = fraud, 0 = not fraud) our model will predict.
+
 * **Duplicate Data Entries**\
-There were 1081 duplicate samples, all of which were removed.
+  There were 1081 duplicate samples, all of which were removed.
+
 * **Null Data**\
-No null data was encountered, therefore, no rows were dropped in this stage.
+  No null data was encountered, therefore, no rows were dropped in this stage.
 
 ### Preprocessing
-* **Data Scaling**\
-It was found that the features ‘Time’ and ‘Amount’ have large numerical values, which are different from other features. \
-‘Time’ is the number of seconds elapsed between this transaction and the first transaction in the dataframe, spanning 48 hours. Therefore, another column ‘Hour’ was added, based on ‘Time’, as ‘Hour’ shows the peak period of credit card usage and its relation to the time of credit card fraud.
-Since the data is not normally distributed, min-max normalization on the data was done, resulting in the variables now having values between 0 and 1, simplifying further analysis.
+* **Data Scaling**
 
-* **Feature Selection**\
-Because of the imbalanced nature of the data, both an undersampled and oversampled correlation matrix were investigated. It was found that they were similar, i.e., sampling had no affect on correlation between variables.\
-![Correlation Matrix](assets/img/data_exp/feature_corr.png)\
-Using kde plots and correlation matrices, it was inferred that Time, V13, V15, V22, V23,V24,V25,V26, V27,V28, Amount, V8, V21 cannot distinguish fraud cases and non-fraud cases well, and thus were dropped.
+  It was found that the features ‘Time’ and ‘Amount’ have large numerical values, which are different from other features. \
+  ‘Time’ is the number of seconds elapsed between this transaction and the first transaction in the dataframe, spanning 48 hours.  Therefore, another column ‘Hour’ was added, based on ‘Time’, as ‘Hour’ shows the peak period of credit card usage and its relation to the time of credit card fraud.
+  Since the data is not normally distributed, min-max normalization on the data was done, resulting in the variables now having values between 0 and 1, simplifying further analysis.
 
-* **Train Set, Test Set**\
-As previously mentioned, there's way more non-fraud data than fraud data. We choose to oversample the fraud data here. If we undersample, we will suffer the risk of losing important information since undersample means we only utilize a tiny fraction of the non-fraud data. In addition, compared to the whole dataset, the minority class does not have sufficient size. Therefore, we will oversample.
+* **Feature Selection**
+
+  Because of the imbalanced nature of the data, both an undersampled and oversampled correlation matrix were investigated. It was found that they were similar, i.e., sampling had no affect on correlation between variables.
+  
+  ![Correlation Matrix](assets/img/data_exp/feature_corr.png)
+   
+   Using kde plots and correlation matrices, it was inferred that Time, V13, V15, V22, V23,V24,V25,V26, V27,V28, Amount, V8, V21 cannot distinguish fraud cases and non-fraud cases well, and thus were dropped.
+
+* **Train Set, Test Set**
+
+  As previously mentioned, there's way more non-fraud data than fraud data. We choose to oversample the fraud data here. If we undersample, we will suffer the risk of losing important information since undersample means we only utilize a tiny fraction of the non-fraud data. In addition, compared to the whole dataset, the minority class does not have sufficient size. Therefore, we will oversample.
 
 ### Model 1 - Logistic Regression
-* **Comparing Train and Test Error**\
-![Logistic Regression Training Confusion Matrix](/assets/img/log_reg/log_reg_training_matrix.png)\
-In the classification report for the training data, the precision was lower (91% compared to 97%) for class 0, whilst recall was higher (97% vs 90% for class 1). Regarding the f1-score they remained largely the same, with scores of 94% and 93% respectively.\
-![Logistic Regression Training Confusion Matrix](/assets/img/log_reg/log_reg_test_matrix.png)\
-Meanwhile, the test data's classification report showed a large difference in precision and recall for the two classes. Class 0 had a precision of 100% and a recall of 97%, whilst class 1 had a precision of 4% with a recall of 86%. The f1-scores were 98% and 8% respectively.
+* **Comparing Train and Test Error**
 
-* **The model's position on a fitting graph**\
-As mentioned in the Methods section, two methods of altering complexity were used two find differnences in the model's performance: PCA, and Polynomial features.\
-![Logistic Regression PCA fitting graph](/assets/img/log_reg/logistic_regression_pca.png)\
-From the PCA-analysis, the fitting graph shows that using 7 principal components decreased the model's complexity adequatly whilst still retaining a low training/test loss.\
+  ![Logistic Regression Training Confusion Matrix](/assets/img/log_reg/log_reg_training_matrix.png)
 
-![Polynomial Features fitting graph](/assets/img/log_reg/logistic_regression_poly_fitting.png)\
-Using different degrees of polynomial features, it became evident that adding complexity using polynomial features only decreased training loss with test loss remaining largely the same. 
+  In the classification report for the training data, the precision was lower (91% compared to 97%) for class 0, whilst recall was higher (97% vs 90% for class 1). Regarding the f1-score they remained largely the same, with scores of 94% and 93% respectively.
+
+  ![Logistic Regression Training Confusion Matrix](/assets/img/log_reg/log_reg_test_matrix.png)
+
+  Meanwhile, the test data's classification report showed a large difference in precision and recall for the two classes. Class 0 had a precision of 100% and a recall of 97%, whilst class 1 had a precision of 4% with a recall of 86%. The f1-scores were 98% and 8% respectively.
+
+* **The model's position on a fitting graph**
+
+  As mentioned in the Methods section, two methods of altering complexity were used two find differnences in the model's performance: PCA, and Polynomial features.
+
+  ![Logistic Regression PCA fitting graph](/assets/img/log_reg/logistic_regression_pca.png)
+
+  From the PCA-analysis, the fitting graph shows that using 7 principal components decreased the model's complexity adequatly whilst still retaining a low training/test loss.
+
+  ![Polynomial Features fitting graph](/assets/img/log_reg/logistic_regression_poly_fitting.png)
+
+  Using different degrees of polynomial features, it became evident that adding complexity using polynomial features only decreased training loss with test loss remaining largely the same. 
 
 ### Model 2 - K-nearest neighbors
-* **Comparing Train and Test Error**\
-Starting with the training data, the model achieved a precision, recall and f1-score of 1.0 for class 0. For class 1, on the other hand, the values were 0.92, 0.78 and 0.85 respectively.\
-Moving on with the test data, precision, recall and f1-score for class 0 remained the same. However, precision went up to 0.99, recall down to 0.76 and in total the f1-score moved up to 0.86. The confusion matrix below shows the results of predicting the test data:
-![KNN test confusion matrix](/assets/img/knn/knn_test_confusion_matrix.png)
-* **The model's position on a fitting graph**\
-Starting with PCA, it was found that 13 was the optimal number of principal components (as seen in the fitting graph below).
-![PCA fitting graph](/assets/img/knn/pca_fitting.png)\
+* **Comparing Train and Test Error**
 
-Regarding the optimal k-value from a fitting-perspective, the value 7 optimized the model's performance.
-![K-value optimization fitting graph](/assets/img/knn/kvalue_fitting.png)
+  Starting with the training data, the model achieved a precision, recall and f1-score of 1.0 for class 0. For class 1, on the other hand, the values were 0.92, 0.78 and 0.85 respectively.\
+  Moving on with the test data, precision, recall and f1-score for class 0 remained the same. However, precision went up to 0.99, recall down to 0.76 and in total the f1-score moved up to 0.86. The confusion matrix below shows the results of predicting the test data:
+
+  ![KNN test confusion matrix](/assets/img/knn/knn_test_confusion_matrix.png)
+
+* **The model's position on a fitting graph**
+
+  Starting with PCA, it was found that 13 was the optimal number of principal components (as seen in the fitting graph below).
+
+  ![PCA fitting graph](/assets/img/knn/pca_fitting.png)
+
+  Regarding the optimal k-value from a fitting-perspective, the value 7 optimized the model's performance.
+
+  ![K-value optimization fitting graph](/assets/img/knn/kvalue_fitting.png)
 
 ### Model 3 - Naive Bayes
-* **Comparing Train and Test Error**\
-In the classification report for both training data and test data, Class 0 and Class 1 had varying scores for precision, recall, and f1-score. For the train data these were 98%, 84% and 90% respectively. For the test data we had 6% precision, 77% recall and 11% f1-score. The accuracy score for both the training data and test data is similar with the accuracy of the training data being 91% and 98% for test data. 
-![Confusion matrix NB test data](/assets/img/nb/cm_test.png)
+* **Comparing Train and Test Error**
+
+  In the classification report for both training data and test data, Class 0 and Class 1 had varying scores for precision, recall, and f1-score. For the train data these were 98%, 84% and 90% respectively. For the test data we had 6% precision, 77% recall and 11% f1-score. The accuracy score for both the training data and test data is similar with the accuracy of the training data being 91% and 98% for test data. 
+
+  ![Confusion matrix NB test data](/assets/img/nb/cm_test.png)
 
 
 # Discussion
@@ -178,7 +203,7 @@ Wrote method and results for the naive bayes model, contribution on the naive ba
 Organized and shared google docs for the writeup. Wrote train and error results for some models. Gave suggestions to use naive bayes on the last model and also gave feedback when needed. 
 * **Hongye Xu (Writing, code contribution to data exploration, processing and fitting graph of the model)**\
 Coded and wrote the documentation of the data exploration and processing step, contributed ideas on and coded how to increase/decrease the complexity of the model, and coded the fitting graph.
-* **Javier Sande (Code contribution to processing, Logistic Regression and KNN)
+* **Javier Sande (Code contribution to processing, Logistic Regression and KNN)**\
 Coded the training of the first model and the optimization and visualization methods in the first model and KNN. Gave and implemented suggestions on how to optimize the results by tuning parameters. Gave suggestions on the interpretation of the results and how they might be applied to the next steps.
 
 
