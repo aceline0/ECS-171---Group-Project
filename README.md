@@ -10,6 +10,8 @@ The file `data/creditcard.csv` contains the dataset with all 285.000 transaction
 
 The folder `code/` contains the different notesbooks and python scripts for the project.
 
+Inside `assets/img/` assets in the form of images related to the different models can be found.
+
 # Introduction
 
 Sadly, finance and fraud are two words that are deeply intertwined. When there is substantial monetary gain available, malicious actors will attempt to carve out a piece. Ever since the Diner Club's card in 1951, the convenience presented by credit cards has led to substantial growth, so much so that in 2021, 581 billion credit card transactions were processed.  
@@ -205,7 +207,9 @@ Organized and shared google docs for the writeup. Wrote train and error results 
 Coded and wrote the documentation of the data exploration and processing step, contributed ideas on and coded how to increase/decrease the complexity of the model, and coded the fitting graph.
 * **Javier Sande (Code contribution to processing, Logistic Regression and KNN)**\
 Coded the training of the first model and the optimization and visualization methods in the first model and KNN. Gave and implemented suggestions on how to optimize the results by tuning parameters. Gave suggestions on the interpretation of the results and how they might be applied to the next steps.
-
+* **Aske Nord Raahauge (Writing, code contribution to Naive Bayes)**\
+Wrote initial preprocessing of data & performed bugfixing on Naive Bayes in order to make it work, also cleaned it up and added assets.
+Made seperate preprocessor for easy running of all models. Got github initially up and running with code, data and writeup.
 
 # References
 * https://stackoverflow.com/questions/55104819/display-count-on-top-of-seaborn-barplot
